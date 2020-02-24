@@ -12,7 +12,6 @@ providing a search across all public Gists for a given Github account.
 import requests
 from flask import Flask, jsonify, request
 
-
 # *The* app object
 app = Flask(__name__)
 
@@ -58,6 +57,7 @@ def search():
         object contains the list of matches along with a 'status' key
         indicating any failure conditions.
     """
+
     post_data = request.get_json()
     # BONUS: Validate the arguments?
 
@@ -69,10 +69,14 @@ def search():
     # BONUS: Handle invalid users?
 
     for gist in gists:
+        print(gist)
         # REQUIRED: Fetch each gist and check for the pattern
         # BONUS: What about huge gists?
         # BONUS: Can we cache results in a datastore/db?
         pass
+
+    response = requests.get('https://api.github.com/gists/e54ee3400524b9643be80266f65fc506')
+    print(response.json())
 
     result['status'] = 'success'
     result['username'] = username
